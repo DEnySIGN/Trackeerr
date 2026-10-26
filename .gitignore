@@ -1,0 +1,11 @@
+.DS_Store
+__pycache__/
+*.pyc
+dist/
+*.apk
+*.aab
+*.jks
+*.keystore
+.env
+.env.*
+node_modules/
