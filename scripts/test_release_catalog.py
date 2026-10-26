@@ -2,15 +2,15 @@ import unittest
 from build_site import release_catalog
 
 class ReleaseCatalogTest(unittest.TestCase):
-    public = {'full_name': 'DEnySIGN/trackeerr', 'private': False}
+    public = {'full_name': 'DEnySIGN/Trackeerr', 'private': False}
     def release(self, tag='v1', **extra):
         return dict({'published_at': '2026-10-26', 'draft': False, 'prerelease': False, 'tag_name': tag,
-            'html_url': f'https://github.com/DEnySIGN/trackeerr/releases/tag/{tag}',
+            'html_url': f'https://github.com/DEnySIGN/Trackeerr/releases/tag/{tag}',
             'assets': [{'name': 'trackeerr.apk', 'state': 'uploaded',
-                'browser_download_url': f'https://github.com/DEnySIGN/trackeerr/releases/download/{tag}/trackeerr.apk',
+                'browser_download_url': f'https://github.com/DEnySIGN/Trackeerr/releases/download/{tag}/trackeerr.apk',
                 'digest': 'sha256:' + 'a' * 64}]}, **extra)
     def test_only_the_public_distribution_repository_is_accepted(self):
-        for metadata in [{'full_name': 'DEnySIGN/trackeerr', 'private': True}, {'full_name': 'someone/another', 'private': False}]:
+        for metadata in [{'full_name': 'DEnySIGN/Trackeerr', 'private': True}, {'full_name': 'someone/another', 'private': False}]:
             with self.assertRaises(ValueError): release_catalog(metadata, [self.release()])
     def test_empty_and_draft_only_releases_keep_the_preparation_notice(self):
         self.assertEqual({'available': False}, release_catalog(self.public, []))
@@ -25,7 +25,7 @@ class ReleaseCatalogTest(unittest.TestCase):
         release['assets'] *= 2
         self.assertEqual({'available': False}, release_catalog(self.public, [release, self.release(assets=[])]))
     def test_unexpected_download_origins_and_parent_paths_are_rejected(self):
-        for url in ['https://example.com/app.apk', 'https://github.com/DEnySIGN/trackeerr/releases/download/../../app.apk']:
+        for url in ['https://example.com/app.apk', 'https://github.com/DEnySIGN/Trackeerr/releases/download/../../app.apk']:
             release = self.release(); release['assets'][0]['browser_download_url'] = url
             with self.assertRaises(ValueError): release_catalog(self.public, [release])
 

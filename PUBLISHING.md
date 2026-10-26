@@ -1,16 +1,16 @@
 # Première publication
 
-## Ordre des opérations GitHub
+## Dépôts et GitHub Pages
 
-Les noms de dépôts GitHub sont insensibles à la casse. Le dépôt Android actuellement nommé `Trackeerr` doit donc être renommé avant de pouvoir créer le dépôt public `trackeerr`.
+- **DEnySIGN/Trackeerr-App** conserve le code Android et reste privé.
+- **DEnySIGN/Trackeerr** contient uniquement ce site et les futures Releases publiques.
+- Le site est publié à l’adresse **https://denysign.github.io/Trackeerr/**. Conserver la majuscule dans ce chemin de projet.
 
-1. Renommer le dépôt Android existant en **trackeerr-app**, en conservant sa visibilité **privée**.
-2. Mettre immédiatement à jour son remote Git HTTPS pour qu’il pointe sur `https://github.com/DEnySIGN/trackeerr-app.git`. Vérifier à nouveau la visibilité privée et l’identité du dépôt. Le répertoire local Android peut conserver son nom ; ne pas copier ses fichiers dans ce dépôt du site.
-3. Créer le nouveau dépôt **DEnySIGN/trackeerr**, visibilité **publique**. Vérifier qu’il s’agit bien d’un nouveau dépôt distinct, pas d’un changement de visibilité du dépôt Android.
-4. Pousser uniquement le présent dépôt du site vers le nouveau remote public. La réutilisation de l’ancien nom rend son ancienne redirection inopérante : ne plus utiliser cet ancien remote pour le code Android.
-5. Dans Settings → Pages du dépôt public, choisir **GitHub Actions**. Vérifier le workflow et l’adresse `https://denysign.github.io/trackeerr/`.
+Les noms de dépôts GitHub sont insensibles à la casse. Le remote du code Android doit pointer sur `https://github.com/DEnySIGN/Trackeerr-App.git` ; le nom `Trackeerr` désigne maintenant le dépôt public. Ne jamais utiliser ce dernier remote pour pousser le code Android.
 
-Ces opérations nécessitent l’accès à l’API GitHub et les droits de gestion correspondants. En l’absence de ces droits, effectuer le renommage et la création dans l’interface GitHub, puis autoriser le nouveau dépôt pour l’intégration utilisée par l’environnement. Ne jamais fournir un mot de passe ou un jeton dans le chat.
+Dans Settings → Pages du dépôt public, choisir **GitHub Actions**. Le workflow `pages.yml` construit uniquement les fichiers publics autorisés, puis les déploie. Il se relance lors d’un push sur `main`, d’une modification de Release ou d’un déclenchement manuel. Un premier README existe déjà dans l’historique du dépôt ; le conserver par une fusion normale, sans push forcé.
+
+Les accès GitHub sont fournis par l’intégration de l’environnement. Ne jamais fournir de mot de passe ou de jeton dans le chat.
 
 ## Premier APK public — après validation téléphone
 

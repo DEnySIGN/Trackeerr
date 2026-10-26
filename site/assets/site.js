@@ -10,10 +10,10 @@ if (menu && navigation) {
   document.addEventListener('keydown', event => { if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') { closeMenu(); menu.focus(); } });
 }
 
-const publicRepo = 'https://github.com/DEnySIGN/trackeerr';
+const publicRepo = 'https://github.com/DEnySIGN/Trackeerr';
 function releaseUrl(value) {
   if (typeof value !== 'string') return false;
-  try { const url = new URL(value); return url.protocol === 'https:' && !url.username && !url.password && url.origin === 'https://github.com' && url.pathname.startsWith('/DEnySIGN/trackeerr/releases/download/') && !url.search && !url.hash && url.pathname.toLowerCase().endsWith('.apk'); } catch { return false; }
+  try { const url = new URL(value); return url.protocol === 'https:' && !url.username && !url.password && url.origin === 'https://github.com' && url.pathname.startsWith('/DEnySIGN/Trackeerr/releases/download/') && !url.search && !url.hash && url.pathname.toLowerCase().endsWith('.apk'); } catch { return false; }
 }
 async function loadRelease() {
   const button = document.querySelector('#apk-download');

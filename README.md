@@ -2,9 +2,9 @@
 
 Site public de présentation et distribution gratuite de l’application Android **Trackeerr**, connectée à vos propres serveurs Jellyfin et Seerr.
 
-Site prévu : **https://denysign.github.io/trackeerr/**.
+Site : **https://denysign.github.io/Trackeerr/**.
 
-Ce dépôt contient uniquement le site, des éléments de marque et des captures de démonstration. Le code Android n’est pas publié ici. Les APK validés seront joints aux [Releases](https://github.com/DEnySIGN/trackeerr/releases), jamais ajoutés à l’historique Git du site.
+Ce dépôt contient uniquement le site, des éléments de marque et des captures de démonstration. Le code Android n’est pas publié ici. Les APK validés seront joints aux [Releases](https://github.com/DEnySIGN/Trackeerr/releases), jamais ajoutés à l’historique Git du site.
 
 ## Prévisualiser
 
@@ -15,7 +15,7 @@ python3 scripts/build_site.py --offline
 python3 -m http.server 4173 --bind 127.0.0.1 --directory dist
 ```
 
-Ouvrir http://127.0.0.1:4173/. Le mode local affiche volontairement la préparation de la première version. Les chemins relatifs fonctionnent aussi sous `/trackeerr/` dans GitHub Pages.
+Ouvrir http://127.0.0.1:4173/. Le mode local affiche volontairement la préparation de la première version. Les chemins relatifs fonctionnent aussi sous `/Trackeerr/` dans GitHub Pages.
 
 ```sh
 python3 -m unittest discover -s scripts -p 'test_*.py' -v

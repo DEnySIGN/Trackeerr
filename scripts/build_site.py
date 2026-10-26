@@ -9,7 +9,7 @@ import shutil
 import urllib.parse
 import urllib.request
 
-REPOSITORY = 'DEnySIGN/trackeerr'
+REPOSITORY = 'DEnySIGN/Trackeerr'
 PUBLIC_URL = f'https://github.com/{REPOSITORY}'
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_FILES = (
