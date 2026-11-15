@@ -1,3 +1,9 @@
 {
-  "available": false
+  "available": true,
+  "version": "v0.6.54",
+  "prerelease": false,
+  "apk": "https://github.com/DEnySIGN/Trackeerr/releases/download/v0.6.54/trackeerr-0.6.54.apk",
+  "page": "https://github.com/DEnySIGN/Trackeerr/releases/tag/v0.6.54",
+  "bytes": 13975022,
+  "sha256": "ea22a87fccbb66d7041dc6aa171151627d5a49c500c69b5b57c5d082988ebf75"
 }

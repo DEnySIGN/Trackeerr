@@ -27,7 +27,29 @@ Un jeton dédié nécessite **Contents: Read and write** sur le seul dépôt pub
 
 Contrôle du 15 novembre 2026 : ce secret permet d’envoyer le manifeste et l’empreinte de la 0.6.54, dont les tailles et SHA-256 sont confirmés par GitHub. Un transfert temporaire de 1 076 882 octets réussit aussi et est supprimé aussitôt. En revanche, un corps de 13 975 022 octets est rejeté immédiatement par l’intermédiaire Cloud avec `HTTP 401`, `authentication failed for integration`, aussi bien pour l’APK que pour un fichier de diagnostic texte de même taille. Le seuil exact n’est pas établi. Ce résultat ne justifie pas d’élargir encore les droits du jeton ; les clients HTTPS ordinaires, en mémoire ou en flux, et la CLI GitHub échouent sur l’APK.
 
-Pour terminer cette livraison, joindre uniquement `trackeerr-0.6.54.apk` au brouillon existant depuis GitHub, sans remplacer les deux fichiers déjà vérifiés et sans publier immédiatement. Le fichier attendu fait **13 975 022 octets**, SHA-256 **`ea22a87fccbb66d7041dc6aa171151627d5a49c500c69b5b57c5d082988ebf75`**. Reprendre ensuite à la vérification de l’actif téléchargé, puis publier et reconstruire le catalogue selon les étapes ci-dessus. Ne pas modifier le binaire testé ou activer le feed pour contourner ce blocage de transfert.
+La solution ci-dessous a ensuite été exécutée avec succès pour la 0.6.54 : 14 morceaux temporaires, assemblage en 19 secondes, APK téléchargé et contrôlé sur GitHub puis dans le Cloud, et suppression des morceaux avant publication. Le binaire conserve exactement ses 13 975 022 octets et son SHA-256 `ea22a87fccbb66d7041dc6aa171151627d5a49c500c69b5b57c5d082988ebf75`.
+
+### Transfert direct par assemblage sur GitHub
+
+La compilation Android reste locale. Le workflow **Assemble verified release APK** se lance uniquement par `workflow_dispatch`, dans le dépôt public, pour un brouillon existant. Il ne compile pas l’application et ne crée aucun artefact Actions ni cache ; il utilise le runner Linux standard du dépôt public. Les morceaux sont des actifs temporaires de Release, supprimés après contrôle du fichier final.
+
+1. Préparer `site/distribution.json` et le brouillon comme ci-dessus, puis commiter les faits du binaire vérifié.
+2. Depuis le Cloud, avec le secret dédié enregistré, envoyer les morceaux de 1 Mio et leur manifeste :
+
+```sh
+python3 scripts/release_transfer.py stage --release-id ID_DU_BROUILLON --apk CHEMIN_APK
+```
+
+3. Déclencher l’assemblage avec l’authentification GitHub de la plateforme :
+
+```sh
+gh workflow run assemble-release.yml --repo DEnySIGN/Trackeerr --ref main -f release_id=ID_DU_BROUILLON
+```
+
+4. Contrôler la réussite du run. Le workflow utilise son `github.token`, limité à Contents en écriture, pour télécharger les morceaux, vérifier leurs tailles/empreintes, assembler l’APK conforme aux faits versionnés, l’attacher et le retélécharger. Il retire uniquement les actifs temporaires prévus, après validation. Il **ne publie pas** la Release. Une incohérence interrompt le traitement sans écraser un APK existant.
+5. Télécharger et vérifier également le fichier final depuis le Cloud, puis poursuivre la publication et la construction du site. Les deux fichiers auxiliaires restent attachés au brouillon.
+
+Ce mécanisme ne nécessite aucun transfert manuel du propriétaire ni secret Android dans GitHub. L’envoi peut reprendre après interruption en conservant les morceaux déjà vérifiés. En secours, le propriétaire peut toujours joindre l’APK directement au brouillon dans son navigateur, sans remplacer les deux fichiers auxiliaires.
 
 Le dossier généré `docs/` est versionné dans `main`. Il contient uniquement les fichiers autorisés par `PUBLIC_FILES`, `release.json` et `update.json`. Commiter les sources du site et le résultat, puis pousser normalement. Dans Settings → Pages : **Deploy from a branch**, branche **main**, dossier **/docs**.
 
