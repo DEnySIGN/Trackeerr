@@ -1,0 +1,27 @@
+name: Assemble verified release APK
+on:
+  workflow_dispatch:
+    inputs:
+      release_id:
+        description: Existing draft release ID
+        required: true
+        type: string
+permissions:
+  contents: write
+concurrency:
+  group: assemble-release-${{ inputs.release_id }}
+  cancel-in-progress: false
+jobs:
+  assemble:
+    if: github.repository == 'DEnySIGN/Trackeerr'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Assemble, verify, attach and remove temporary pieces
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_ID: ${{ inputs.release_id }}
+        run: python3 scripts/release_transfer.py assemble --release-id "$RELEASE_ID"
