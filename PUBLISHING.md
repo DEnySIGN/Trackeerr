@@ -19,7 +19,11 @@ Le constructeur utilise la CLI GitHub pour lire seulement les métadonnées du d
 
 ## GitHub Pages
 
+L’environnement de publication doit autoriser `api.github.com` pour les métadonnées et **`uploads.github.com`** pour joindre les fichiers de Release. L’accès à `github.com`, `release-assets.githubusercontent.com` et `denysign.github.io` permet ensuite de contrôler les téléchargements et le site. Un refus `CONNECT 403` avant TLS indique un domaine bloqué par le réseau de l’environnement ; il faut faire ajouter le domaine manquant dans ses paramètres, sans contourner le proxy ni retirer les autres autorisations.
+
 Le dossier généré `docs/` est versionné dans `main`. Il contient uniquement les fichiers autorisés par `PUBLIC_FILES`, `release.json` et `update.json`. Commiter les sources du site et le résultat, puis pousser normalement. Dans Settings → Pages : **Deploy from a branch**, branche **main**, dossier **/docs**.
+
+Si l’intégration GitHub reçoit `Resource not accessible by integration` pour ce réglage, le propriétaire doit l’enregistrer dans les paramètres du dépôt. Les droits de pousser des fichiers ne donnent pas nécessairement les droits d’administration Pages ou d’activation du signalement privé de sécurité.
 
 Le workflow Pages qui chargeait un artefact Actions a été retiré. La compilation Android, la préparation du site et les APK ne consomment plus de stockage d’artefacts ou de caches Actions. GitHub assure le déploiement Pages de branche ; le projet ne crée pas d’artefact de workflow à conserver. Une nouvelle Release ne reconstruit plus automatiquement le site : relancer la commande locale et pousser `docs/` fait partie de chaque publication.
 
