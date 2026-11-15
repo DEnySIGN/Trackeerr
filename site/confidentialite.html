@@ -2,6 +2,8 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#081428">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <title>Confidentialité — Trackeerr</title><meta name="description" content="Comment fonctionnent le site Trackeerr, les connexions aux serveurs et l’import de sauvegardes.">
 <link rel="icon" type="image/svg+xml" href="./assets/brand/logo-icon.svg"><link rel="stylesheet" href="./assets/site.css">
 <link rel="canonical" href="https://denysign.github.io/Trackeerr/confidentialite.html">
@@ -18,8 +20,13 @@
 <h2>Dans l’application Android</h2>
 <p>Vous renseignez vos propres adresses Jellyfin et Seerr dans l’application. La connexion utilise le compte Jellyfin et ouvre des sessions sur ces services. Le fonctionnement de ces serveurs et leurs journaux dépend de votre administrateur.</p>
 <p>Trackeerr conserve localement les profils, suivis, états vus et favoris, modifications en attente et données de cache. La synchronisation échange les états nécessaires avec les serveurs configurés. L’application ne fournit aucun service central de compte Trackeerr.</p>
+<p>Les sessions sont chiffrées avec une clé gérée par Android Keystore ; le mot de passe n’est pas enregistré. Les profils et le cache restent dans l’espace de l’application ou dans l’emplacement de cache que vous choisissez. Les images peuvent provenir directement du CDN public TMDB, de Jellyfin ou du proxy Seerr ; ces services reçoivent les informations techniques nécessaires à leur téléchargement. Les identifiants Jellyfin/Seerr ne sont pas envoyés au CDN TMDB.</p>
+<h2>Vérification des mises à jour</h2>
+<p>Dans Profil, vous pouvez activer une vérification à l’ouverture de l’application, au maximum une fois par période de 24 heures, ou la lancer manuellement. L’option automatique est désactivée au départ. Le contrôle lit un petit catalogue public HTTPS sur GitHub Pages, sans transmettre compte, historique, adresses de serveur, identifiant d’appareil ou jeton. GitHub reçoit l’adresse IP et les informations techniques habituelles de la requête.</p>
+<p>Si vous choisissez de télécharger une version, votre navigateur accède à la Release GitHub officielle. Android demande votre confirmation et contrôle la signature lors de l’installation. Aucun téléchargement d’APK ni installation silencieuse n’est déclenché par la vérification automatique.</p>
 <h2>Les sauvegardes et l’IA de votre choix</h2>
 <p>L’export de profil Trackeerr exclut les mots de passe, jetons et cookies de connexion. Vous choisissez le fichier à conserver et son fournisseur de stockage.</p>
+<p>Ce JSON contient votre historique et n’est pas chiffré. L’import d’une sauvegarde crée un nouveau profil. La déconnexion efface les sessions mais conserve les profils locaux ; désinstaller l’application efface les données restées dans son espace privé. Les fichiers que vous avez explicitement exportés ou placés dans un dossier externe doivent être supprimés depuis cet emplacement si vous le souhaitez.</p>
 <p>Le bouton de préparation d’un import externe copie uniquement un prompt dans le presse-papiers. Aucun fichier n’est envoyé automatiquement à une IA. Si vous transmettez votre ancienne sauvegarde à un service d’IA, ce transfert relève de votre choix et des conditions de ce service. Le fichier converti est ensuite sélectionné et traité localement dans Trackeerr.</p>
 <h2>Captures de démonstration</h2>
 <p>Les captures publiques du site utilisent des données de démonstration. Elles ne contiennent aucun identifiant de connexion ni adresse d’un serveur utilisateur.</p>

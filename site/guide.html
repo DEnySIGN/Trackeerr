@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="description" content="Installer et utiliser Trackeerr : connexion Jellyfin et Seerr, TrackList, épisodes, imports, sauvegardes et mises à jour Android.">
+  <title>Guide d’utilisation — Trackeerr</title>
+  <link rel="canonical" href="https://denysign.github.io/Trackeerr/guide.html">
+  <link rel="icon" type="image/svg+xml" href="./assets/brand/logo-icon.svg">
+  <link rel="stylesheet" href="./assets/site.css">
+</head>
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<header class="header container"><a class="brand" href="./" aria-label="Trackeerr, accueil"><img src="./assets/brand/logo-dark-compact.svg" alt="Trackeerr" width="774" height="200"></a><a class="button button-outline" href="./#telecharger">Télécharger</a></header>
+<main class="legal container" id="contenu">
+<p>Guide · Android 8.0 et plus · Trackeerr 0.6.54</p>
+<h1>Votre suivi,<br>pas à pas.</h1>
+<nav class="guide-contents" aria-label="Sommaire du guide"><a href="#installer">Installer</a><a href="#connecter">Se connecter</a><a href="#suivre">Suivre ses médias</a><a href="#synchroniser">Synchroniser</a><a href="#importer">Importer</a><a href="#sauvegarder">Sauvegarder</a><a href="#actualiser">Mettre à jour</a><a href="#aide">Obtenir de l’aide</a></nav>
+
+<section id="installer"><h2>Installer l’application</h2>
+<ol><li>Depuis <a href="./#telecharger">Télécharger</a>, récupérez l’APK de la dernière version sur la Release officielle GitHub.</li><li>Ouvrez le fichier depuis votre navigateur ou vos téléchargements. Si Android le demande, autorisez cette source à installer une application.</li><li>Confirmez l’installation, puis ouvrez Trackeerr. Vous pouvez ensuite désactiver l’autorisation d’installation de cette source.</li></ol>
+<p>Pour une mise à jour, installez toujours par-dessus l’application existante. Ne désinstallez pas : cela effacerait les données locales. Si Android refuse la signature, vérifiez que le fichier vient bien de la Release officielle et que votre installation précédente est compatible.</p>
+<p>L’empreinte SHA-256 du fichier est affichée sur le site et dans les notes de version. La signature Android identifie l’éditeur lors d’une mise à jour ; une empreinte publiée sur le même site ne constitue pas, à elle seule, une preuve indépendante de son authenticité.</p></section>
+
+<section id="connecter"><h2>Connecter Jellyfin et Seerr</h2>
+<p>Vous avez besoin d’un compte Jellyfin et d’une instance Seerr reliée au même serveur, avec la connexion Jellyfin activée. Trackeerr ne fournit aucun contenu ni serveur, et ne demande aucun compte Trackeerr.</p>
+<ol><li>Renseignez les adresses finales des deux services, y compris leur sous-chemin éventuel.</li><li>Utilisez votre compte Jellyfin. Les autorisations de votre serveur restent appliquées.</li><li>Choisissez ou créez votre profil local. Lancez ensuite <strong>Synchro → Vérifier et synchroniser</strong> pour établir la comparaison.</li></ol>
+<p>Privilégiez HTTPS et un certificat valide. HTTP reste possible pour un réseau local de confiance, après confirmation explicite ; il ne chiffre pas les identifiants transmis. Un accès distant peut nécessiter le VPN ou la configuration fournis par votre administrateur.</p></section>
+
+<section id="suivre"><h2>Retrouver et suivre vos médias</h2>
+<ul><li><strong>Regarder</strong> rassemble notamment les médias à reprendre, du dernier visionnage au plus ancien. Un média commencé reste suivi même s’il est absent de Jellyfin ; la progression concerne le film ou l’épisode affiché.</li><li><strong>Découvrir</strong> propose catalogue, recherche, tris et filtre Favoris. Lorsqu’un texte est saisi, le tri porte sur les résultats chargés, sans prétendre classer tout le catalogue distant.</li><li><strong>TrackList</strong> regroupe À venir, À voir, Vu et Abandon. La recherche peut être étendue aux autres onglets.</li></ul>
+<p>Sur une affiche suivie, le cœur modifie le favori et l’œil le statut Vu. Hors WatchList, le marque-page permet d’ajouter le média. Dans une fiche, vous retrouvez les trois états, le synopsis, le casting et les recommandations ; un artiste ouvre sa fiche et sa filmographie triable.</p>
+<p><strong>Pour une série, Tout vu s’applique aux épisodes ordinaires diffusés ou réellement disponibles en avance.</strong> Les spéciaux et épisodes futurs indisponibles sont exclus. Une nouveauté diffusée non vue retire la complétion lorsque son catalogue est actualisé. Les numérotations trouées après fusion d’épisodes sont prises en compte.</p>
+<p>Pour arrêter un suivi sans perdre l’historique : touchez le marque-page actif, puis <strong>Abandonner le suivi</strong>. Le marque-page barré permet de reprendre le suivi ou de retirer le média. Abandonner ne remet pas les épisodes à zéro.</p>
+<p>Le libellé Jellyfin cyan indique une disponibilité confirmée ; Jellyfin barré indique une absence confirmée ; À vérifier correspond à une disponibilité encore inconnue. Le lien Jellyfin d’un média disponible et le logo TMDB ouvrent leur fiche respective.</p></section>
+
+<section id="synchroniser"><h2>Comprendre la synchronisation et le cache</h2>
+<p>Les choix sont d’abord conservés sur le téléphone. <strong>Synchro → Vérifier et synchroniser</strong> compare les services, traite les envois et conflits, met à jour les disponibilités et complète les descriptions des médias suivis. La dernière étape ne précharge pas les images.</p>
+<p>Vu et Favori échangent avec Jellyfin lorsqu’une correspondance est confirmée. Le partage de WatchList avec Seerr est réglable dans Profil. L’abandon du suivi reste local au profil. Les épisodes importés sans identité sûre restent locaux jusqu’à leur rapprochement.</p>
+<p>Les confirmations et modifications non envoyées sont conservées en cas de coupure. Consultez <strong>Suivi des envois</strong> pour reprendre ; ne réimportez pas tout votre historique à chaque interruption. Les réponses en cache s’affichent en priorité, puis se réactualisent selon les réglages. Une donnée encore inconnue n’est pas assimilée à une absence.</p>
+<p>Dans une fiche, <strong>Tout</strong> actualise l’ensemble, <strong>Statuts</strong> cible les états et <strong>Fiche</strong> les descriptions et images. Les demandes Seerr tiennent compte de Jellyfin : un film déjà présent n’est pas proposé, et seules les saisons encore manquantes restent éligibles.</p></section>
+
+<section id="importer"><h2>Importer un ancien historique</h2>
+<ol><li>Ouvrez <strong>Profil → Importer depuis une autre application</strong>.</li><li>Copiez le prompt proposé. Si nécessaire, convertissez votre export avec l’outil ou l’IA de votre choix ; aucun fichier n’est transmis automatiquement par Trackeerr.</li><li>Importez le JSONL obtenu et lisez le bilan. Les statuts vrais sont fusionnés sans écraser les autres états.</li><li>Dans <strong>Synchro → Détails et réglages → Médias non identifiés</strong>, rapprochez les titres restants. Enchaîner prépare les prochains choix ; Choix uniques permet de traiter les correspondances simples.</li></ol>
+<p>Vérifiez l’affiche et le synopsis avant de lier un média. Le lien conserve l’historique et ses flags ; il ne signifie pas que le média existe sur Jellyfin. Pour les épisodes d’une série identifiée, les coordonnées saison/numéro sont utilisées, sans imposer l’égalité des titres.</p>
+<p>Un export d’historique contient des données personnelles : ne le publiez pas dans un ticket GitHub. Si vous le confiez à une IA, choisissez ce service et ses conditions de confidentialité en connaissance de cause.</p></section>
+
+<section id="sauvegarder"><h2>Profils, sauvegardes et apparence</h2>
+<p><strong>Profil → Sauvegarder mon profil</strong> produit un JSON sans mot de passe, jeton ni cookie. Il contient votre historique : conservez-le dans un emplacement de confiance. Le JSON n’est pas chiffré. Importer une sauvegarde crée un nouveau profil et ne remplace pas les profils existants.</p>
+<p>Les réglages d’apparence permettent notamment d’ajuster les textes, la taille et la transparence des icônes, les affiches, les espacements et les animations. Les saisons entièrement vues sont cyan ; le soulignement indique toujours la saison sélectionnée. L’onglet des épisodes spéciaux peut être masqué.</p></section>
+
+<section id="actualiser"><h2>Recevoir les mises à jour sans Play Store</h2>
+<p>Dans <strong>Profil → Mises à jour de Trackeerr</strong>, activez <strong>Vérifier les mises à jour automatiquement</strong> pour une vérification à l’ouverture, au maximum une fois par période de 24 heures. La fréquence est fixe ; l’option est désactivée au départ. Le bouton <strong>Vérifier maintenant</strong> est placé juste dessous et fonctionne indépendamment.</p>
+<p>Le contrôle lit un petit catalogue public HTTPS hébergé par GitHub, sans compte, adresse de serveur, identifiant d’appareil ni historique. Il ne bloque pas les écrans et ne lance aucune tâche permanente en arrière-plan. Une erreur conserve l’application utilisable.</p>
+<p>Si une version plus récente compatible est annoncée, Trackeerr propose le téléchargement officiel. Votre navigateur télécharge l’APK ; Android confirme son installation et vérifie sa signature. Trackeerr n’installe rien silencieusement et ne demande pas la permission d’installer elle-même des paquets.</p>
+<figure class="guide-figure"><img src="./assets/screenshots/mises-a-jour.png" alt="Réglage de vérification automatique et bouton Vérifier maintenant dans Profil." width="780" height="1688" loading="lazy"><figcaption>Démonstration native avec un compte fictif.</figcaption></figure></section>
+
+<section id="aide"><h2>Obtenir de l’aide</h2>
+<p>Avant de signaler un problème, notez la version de Trackeerr, le modèle du téléphone, la version Android et les étapes pour reproduire. Les diagnostics proposés par l’application masquent les secrets ; relisez néanmoins tout fichier avant de le partager.</p>
+<p>Pour un bug ordinaire, utilisez les <a href="https://github.com/DEnySIGN/Trackeerr/issues">tickets publics</a>. Pour une vulnérabilité, suivez la <a href="https://github.com/DEnySIGN/Trackeerr/security/policy">politique de sécurité</a> : utilisez le signalement privé s’il est disponible, ou demandez un contact privé sans exposer le problème dans un ticket public.</p></section>
+
+<section id="credits"><h2>Crédits</h2>
+<p>Captures natives de démonstration : médias et images fictifs, sans données de catalogue ni compte réel. Certaines captures de présentation précèdent cette livraison ; les détails visuels peuvent évoluer.</p>
+<p>Inter : SIL Open Font License, <a href="./assets/fonts/OFL.txt">licence</a>. Icône Jellyfin : Jellyfin contributors, <a href="https://github.com/jellyfin/jellyfin-ux/blob/master/logos/SVG/jellyfin-icon--flat-on-dark.svg">source</a>, <a href="./assets/licenses/Jellyfin-UX-CC-BY-SA-4.0.txt">CC BY-SA 4.0</a> ; adaptation native avec dégradé violet/cyan ou teinte neutre. Logos Seerr et TMDB : projets respectifs. Ce produit utilise les données TMDB, sans être approuvé ni certifié par TMDB.</p></section>
+</main>
+<footer class="footer"><div class="footer-bottom container"><span>© 2026 DEnySIGN · Trackeerr</span><a href="./confidentialite.html">Confidentialité</a><a href="./">Retour à l’accueil</a></div></footer>
+</body>
+</html>

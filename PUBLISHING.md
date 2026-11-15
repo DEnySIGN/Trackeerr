@@ -1,27 +1,33 @@
-# Première publication
+# Publier Trackeerr sans artefacts Actions
 
-## Dépôts et GitHub Pages
+Le code Android reste dans **DEnySIGN/Trackeerr-App, privé**. Ce dépôt public contient le site, le guide, les métadonnées de distribution et les Releases. Ne jamais y copier une archive de reprise, une clé de signature, un historique utilisateur ou les sources Android.
 
-- **DEnySIGN/Trackeerr-App** conserve le code Android et reste privé.
-- **DEnySIGN/Trackeerr** contient uniquement ce site et les futures Releases publiques.
-- Le site est publié à l’adresse **https://denysign.github.io/Trackeerr/**. Conserver la majuscule dans ce chemin de projet.
+## Préparer une version
 
-Les noms de dépôts GitHub sont insensibles à la casse. Le remote du code Android doit pointer sur `https://github.com/DEnySIGN/Trackeerr-App.git` ; le nom `Trackeerr` désigne maintenant le dépôt public. Ne jamais utiliser ce dernier remote pour pousser le code Android.
+1. Compiler et tester localement l’APK. Garder `fr.trackeerr.app.cloudv2` et le certificat SHA-256 `f3743f0ac490d9fd17816217d3309d9fb2d439787a748185f148068f410c124f` pour préserver les mises à jour. La clé privée reste hors Git et des fichiers publics.
+2. Vérifier l’identifiant, la version, le code croissant, le SDK minimal, le caractère non débogable et la signature dans le fichier final. Calculer son SHA-256 et sa taille. Reporter ces faits vérifiés dans `site/distribution.json`.
+3. Créer une Release brouillon `vX.Y.Z` dans DEnySIGN/Trackeerr. Joindre exactement un APK nommé `trackeerr-X.Y.Z.apk`, son `SHA256SUMS.txt` et les métadonnées `trackeerr-release.json`. Vérifier l’actif téléchargé avant publication. L’archive de sources GitHub contient uniquement ce site, pas le code Android.
+4. Publier la Release avec les changements et instructions. Conserver l’APK d’origine privé et les versions précédentes.
+5. Contrôler puis construire les fichiers publics :
 
-Dans Settings → Pages du dépôt public, choisir **GitHub Actions**. Le workflow `pages.yml` construit uniquement les fichiers publics autorisés, puis les déploie. Il se relance lors d’un push sur `main`, d’une modification de Release ou d’un déclenchement manuel. Un premier README existe déjà dans l’historique du dépôt ; le conserver par une fusion normale, sans push forcé.
+```sh
+python3 -m unittest discover -s scripts -p 'test_*.py' -v
+python3 scripts/build_site.py --pages
+```
 
-Les accès GitHub sont fournis par l’intégration de l’environnement. Ne jamais fournir de mot de passe ou de jeton dans le chat.
+Le constructeur utilise la CLI GitHub pour lire seulement les métadonnées du dépôt public. L’APK publié, sa taille et son empreinte doivent correspondre à la distribution préparée. Aucune version n’est proposée à l’application si sa Release manque, est une préversion, ou contient un binaire différent.
 
-## Premier APK public — après validation téléphone
+## GitHub Pages
 
-- Attendre la validation demandée par le propriétaire. Aucun APK n’est inclus dans le site ou dans cette préparation.
-- Préparer l’APK de distribution et sa signature durable, conserver une sauvegarde privée de la clé, et définir le passage depuis les APK de test. Ne pas changer de clé sans prévoir ce passage : Android exige une signature compatible pour une mise à jour directe.
-- Dans le **dépôt public**, créer une Release avec un tag tel que `v0.6.3` et joindre exactement un APK validé, par exemple `trackeerr-v0.6.3.apk`. Joindre éventuellement une empreinte SHA-256 et les notes de version. Ne pas marquer une version de test comme stable.
-- Publier la Release. Le workflow Pages reconstruit automatiquement le catalogue de téléchargements ; son constructeur lit uniquement les métadonnées et actifs publics. Il ne compile pas l’application et n’accède pas au dépôt Android privé.
-- Vérifier le téléchargement dans un navigateur puis l’installation et la mise à jour sur téléphone.
+Le dossier généré `docs/` est versionné dans `main`. Il contient uniquement les fichiers autorisés par `PUBLIC_FILES`, `release.json` et `update.json`. Commiter les sources du site et le résultat, puis pousser normalement. Dans Settings → Pages : **Deploy from a branch**, branche **main**, dossier **/docs**.
 
-Les archives de code ZIP/TAR automatiquement proposées par GitHub dans ces Releases contiendront uniquement les fichiers du site. Le code Android reste dans son dépôt privé.
+Le workflow Pages qui chargeait un artefact Actions a été retiré. La compilation Android, la préparation du site et les APK ne consomment plus de stockage d’artefacts ou de caches Actions. GitHub assure le déploiement Pages de branche ; le projet ne crée pas d’artefact de workflow à conserver. Une nouvelle Release ne reconstruit plus automatiquement le site : relancer la commande locale et pousser `docs/` fait partie de chaque publication.
 
-## Maintenir la page
+## Vérifier après publication
 
-Pour une nouvelle version, publier une nouvelle Release et son APK. Le catalogue préfère la première version stable utilisable dans la liste fournie par GitHub ; les préversions sont affichées seulement en l’absence de version stable avec APK. Une Release sans APK ou avec plusieurs APK est ignorée pour éviter un choix ambigu. Le lien vers toutes les versions reste disponible.
+- Le site affiche la bonne version, son empreinte et son téléchargement ; guide et confidentialité sont lisibles sur mobile et ordinateur.
+- `https://denysign.github.io/Trackeerr/update.json` annonce le même APK, identifiant, code, certificat, taille et SHA-256, sans secret ni adresse privée.
+- Le téléchargement public correspond octet pour octet au fichier vérifié. Tester ensuite la mise à jour par-dessus sur téléphone, sans désinstaller.
+- Le code Android reste privé ; aucune clé ni donnée réelle n’est publiée.
+
+La vérification automatique est optionnelle et limitée à une tentative par 24 heures à l’ouverture, y compris après échec. Vérifier maintenant contourne ce délai à la demande. Le navigateur télécharge l’APK et Android autorise son installation : pas d’installation silencieuse ni de permission d’installation demandée par Trackeerr.

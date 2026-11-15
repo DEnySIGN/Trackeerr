@@ -10,10 +10,17 @@ if (menu && navigation) {
   document.addEventListener('keydown', event => { if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') { closeMenu(); menu.focus(); } });
 }
 
-const publicRepo = 'https://github.com/DEnySIGN/Trackeerr';
-function releaseUrl(value) {
+function releaseUrl(value, kind = 'download') {
   if (typeof value !== 'string') return false;
-  try { const url = new URL(value); return url.protocol === 'https:' && !url.username && !url.password && url.origin === 'https://github.com' && url.pathname.startsWith('/DEnySIGN/Trackeerr/releases/download/') && !url.search && !url.hash && url.pathname.toLowerCase().endsWith('.apk'); } catch { return false; }
+  try {
+    const url = new URL(value);
+    const segments = url.pathname.split('/');
+    return url.protocol === 'https:' && !url.username && !url.password && url.origin === 'https://github.com' &&
+      value === url.href && decodeURIComponent(url.pathname) === url.pathname && !url.search && !url.hash &&
+      segments[1] === 'DEnySIGN' && segments[2] === 'Trackeerr' && segments[3] === 'releases' &&
+      (kind === 'download' ? segments.length === 7 && segments[4] === 'download' && /^v[0-9]+\.[0-9]+\.[0-9]+$/.test(segments[5]) && segments[6] === `trackeerr-${segments[5].slice(1)}.apk`
+        : segments.length === 6 && segments[4] === 'tag' && /^v[0-9]+\.[0-9]+\.[0-9]+$/.test(segments[5]));
+  } catch { return false; }
 }
 async function loadRelease() {
   const button = document.querySelector('#apk-download');
@@ -26,7 +33,7 @@ async function loadRelease() {
     document.querySelector('#release-title').textContent = `${release.prerelease ? 'Préversion' : 'Version'} ${release.version}`;
     document.querySelector('#release-description').textContent = 'Gratuit · Android 8.0 et plus. Téléchargement direct depuis GitHub.';
     button.href = release.apk; button.hidden = false;
-    if (typeof release.page === 'string' && release.page.startsWith(`${publicRepo}/releases/tag/`)) document.querySelector('#release-page').href = release.page;
+    if (releaseUrl(release.page, 'page')) document.querySelector('#release-page').href = release.page;
     document.querySelector('#release-note').textContent = 'Retrouvez les changements et les instructions dans les notes de version.';
     if (typeof release.sha256 === 'string' && /^[a-f0-9]{64}$/i.test(release.sha256)) {
       document.querySelector('#checksum-value').textContent = release.sha256;

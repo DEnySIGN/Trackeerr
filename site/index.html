@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
   <meta name="theme-color" content="#081428">
   <meta name="description" content="Trackeerr, l’application Android gratuite pour retrouver vos suivis, favoris et épisodes Jellyfin et Seerr au même endroit.">
   <meta property="og:type" content="website">
@@ -22,7 +24,7 @@
     <a class="brand" href="./" aria-label="Trackeerr, accueil"><img src="./assets/brand/logo-dark-compact.svg" alt="Trackeerr" width="774" height="200"></a>
     <button class="menu-button" type="button" aria-expanded="false" aria-controls="navigation" hidden>Menu <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     <nav id="navigation" aria-label="Navigation principale">
-      <a href="#application">L’application</a><a href="#installation">Installation</a><a href="#questions">Questions</a>
+      <a href="#application">L’application</a><a href="#installation">Installation</a><a href="./guide.html">Guide</a><a href="#questions">Questions</a>
     </nav>
     <a class="button button-outline header-download" href="#telecharger">Télécharger</a>
   </header>
@@ -37,28 +39,34 @@
         </div>
         <p class="hero-note">Gratuit · Android 8.0 et plus · Vos propres serveurs</p>
       </div>
-      <div class="hero-preview"><div class="phone phone-hero"><img src="./assets/screenshots/accueil.png" alt="Accueil Trackeerr : les médias à reprendre et leur disponibilité dans Jellyfin." width="1233" height="2673" fetchpriority="high"></div></div>
+      <div class="hero-preview"><div class="phone phone-hero"><img src="./assets/screenshots/accueil.png" alt="Accueil Trackeerr : les médias à reprendre et leur disponibilité dans Jellyfin." width="780" height="1688" fetchpriority="high"></div></div>
     </section>
     <div class="service-strip container"><strong>Vos médias, vos services, votre suivi.</strong><span>Jellyfin + Seerr</span></div>
 
     <section class="tour container section" id="application" aria-labelledby="tour-title">
       <div class="section-intro"><h2 id="tour-title">Tout votre suivi,<br>au même endroit.</h2><p>À regarder, déjà vus, favoris : retrouvez le fil de vos envies, du film à l’épisode.</p></div>
       <div class="tour-rail">
-        <figure><div class="phone"><img src="./assets/screenshots/accueil.png" alt="L’accueil rassemble les médias commencés et les contenus disponibles." width="1233" height="2673" loading="lazy"></div><figcaption><h3>Reprendre le fil</h3><p>Retrouvez vos médias commencés et leur disponibilité.</p></figcaption></figure>
-        <figure><div class="phone"><img src="./assets/screenshots/serie.png" alt="Une fiche série avec statuts, synchronisation rapide et progression des épisodes." width="1233" height="2673" loading="lazy"></div><figcaption><h3>Suivre chaque épisode</h3><p>Résumés, miniatures et progression, saison après saison.</p></figcaption></figure>
-        <figure><div class="phone"><img src="./assets/screenshots/tracklist.png" alt="La TrackList, avec ses films et séries à voir ou déjà vus." width="1233" height="2673" loading="lazy"></div><figcaption><h3>Garder vos envies</h3><p>Films et séries restent dans votre TrackList, vus ou à voir.</p></figcaption></figure>
+        <figure><div class="phone"><img src="./assets/screenshots/accueil.png" alt="L’accueil rassemble les médias commencés et les contenus disponibles." width="780" height="1688" loading="lazy"></div><figcaption><h3>Reprendre le fil</h3><p>Vos films et séries commencés, même absents de Jellyfin, dans l’ordre de votre dernier visionnage.</p></figcaption></figure>
+        <figure><div class="phone"><img src="./assets/screenshots/serie.png" alt="Une fiche série avec statuts et épisodes vus, dont une numérotation trouée." width="780" height="1688" loading="lazy"></div><figcaption><h3>Suivre chaque épisode</h3><p>Un statut global qui suit vos épisodes, des saisons vues en cyan et une place pour les nouveautés.</p></figcaption></figure>
+        <figure><div class="phone"><img src="./assets/screenshots/tracklist.png" alt="La recherche TrackList dans les onglets À venir, À voir, Vu et Abandon." width="780" height="1688" loading="lazy"></div><figcaption><h3>Garder vos envies</h3><p>À venir, À voir, Vu ou Abandon : retrouvez vos favoris sans perdre votre historique.</p></figcaption></figure>
       </div>
-      <p class="demo-caption">Captures de démonstration de l’application.</p>
+      <p class="demo-caption">Captures natives avec médias et images fictifs. Certains détails visuels peuvent évoluer.</p>
+      <div class="feature-grid">
+        <article><h3>Votre historique reste avec vous</h3><p>Profils locaux, sauvegardes et import depuis une autre application, avec une aide pour identifier les titres restants.</p></article>
+        <article><h3>Vos services se retrouvent</h3><p>Disponibilités Jellyfin, suivi et demandes Seerr, conflits expliqués et envois repris après une coupure.</p></article>
+        <article><h3>Plus de façons de découvrir</h3><p>Recherche, favoris, casting et fiches artistes, avec des filmographies que vous pouvez trier.</p></article>
+      </div>
+      <p class="guide-link"><a class="text-link" href="./guide.html">Consulter le guide d’utilisation</a></p>
     </section>
 
     <section class="download container" id="telecharger" aria-labelledby="download-title">
       <div class="download-intro"><img class="download-brand" src="./assets/brand/logo-dark-compact.svg" alt="Trackeerr" width="774" height="200" loading="lazy"><h2 id="download-title">Prêt pour votre<br>prochaine soirée ?</h2><p>Trackeerr s’installe directement sur votre téléphone Android.</p></div>
       <div class="download-status" aria-live="polite">
-        <h3 id="release-title">Première version publique<br>en préparation</h3>
-        <p id="release-description">Le téléchargement sera disponible après validation sur téléphone.</p>
+        <h3 id="release-title">Téléchargement officiel</h3>
+        <p id="release-description">Consultez la dernière version sur GitHub.</p>
         <a class="button button-primary" id="apk-download" hidden> Télécharger l’APK <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 17v4h14v-4"/></svg></a>
         <a class="button button-outline" id="release-page" href="https://github.com/DEnySIGN/Trackeerr/releases">Voir les versions sur GitHub <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6m0-6L10 14M10 4H4v16h16v-6"/></svg></a>
-        <p class="release-note" id="release-note">Les APK seront distribués gratuitement depuis les Releases.</p>
+        <p class="release-note" id="release-note">APK gratuit, installé et mis à jour directement sur votre téléphone.</p>
         <details class="checksum" id="checksum" hidden><summary>Vérifier le fichier téléchargé</summary><p>Empreinte SHA-256</p><code id="checksum-value"></code><button type="button" class="text-link" id="copy-checksum">Copier l’empreinte</button><span id="copy-status" role="status"></span></details>
         <noscript><p>Consultez les versions sur GitHub pour connaître les téléchargements disponibles.</p></noscript>
       </div>
@@ -69,23 +77,24 @@
       <ol class="steps">
         <li><span class="step-number" aria-hidden="true">01</span><h3>Installer l’APK</h3><p>Téléchargez la version publiée, puis autorisez son installation pour votre navigateur.</p></li>
         <li><span class="step-number" aria-hidden="true">02</span><h3>Connecter vos services</h3><p>Renseignez vos adresses Jellyfin et Seerr, puis connectez votre compte Jellyfin.</p></li>
-        <li><span class="step-number" aria-hidden="true">03</span><h3>Retrouver votre suivi</h3><p>Vos listes et vos états se synchronisent. Vous pouvez aussi importer votre ancien historique.</p></li>
+        <li><span class="step-number" aria-hidden="true">03</span><h3>Retrouver votre suivi</h3><p>Lancez Vérifier et synchroniser. Vous pouvez aussi importer votre ancien historique et choisir les échanges avec Seerr.</p></li>
       </ol>
     </section>
 
     <section class="faq container section" id="questions" aria-labelledby="faq-title">
       <div class="faq-intro"><h2 id="faq-title">Avant de<br>vous lancer.</h2><p>Quelques réponses pour commencer simplement.</p></div>
       <div class="faq-list">
-        <details name="trackeerr-faq" open><summary>Trackeerr est-elle gratuite ?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7v14"/></svg></summary><p>Oui. L’APK sera proposé gratuitement, sans abonnement Trackeerr.</p></details>
+        <details name="trackeerr-faq" open><summary>Trackeerr est-elle gratuite ?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7v14"/></svg></summary><p>Oui. L’APK est proposé gratuitement, sans abonnement Trackeerr.</p></details>
         <details name="trackeerr-faq"><summary>Faut-il un serveur Jellyfin et Seerr ?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7v14"/></svg></summary><p>Oui. Il vous faut un compte Jellyfin et une instance Seerr reliée à ce serveur, avec l’authentification Jellyfin activée. Vous utilisez les adresses fournies par votre administrateur.</p></details>
         <details name="trackeerr-faq"><summary>L’application fournit-elle des films ou des séries ?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7v14"/></svg></summary><p>Trackeerr organise le suivi de vos médias et de vos demandes. Elle ne fournit aucun film, aucune série et aucun serveur de streaming.</p></details>
         <details name="trackeerr-faq"><summary>Puis-je importer mon ancien historique ?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7v14"/></svg></summary><p>Oui. Dans Profil, un prompt à copier vous aide à faire convertir votre sauvegarde par l’IA de votre choix. Importez ensuite le fichier converti : les états vrais sont conservés, et les films et séries rejoignent votre TrackList. Le bilan signale les titres non identifiés.</p></details>
+        <details name="trackeerr-faq"><summary>Comment recevoir les mises à jour ?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7v14"/></svg></summary><p>Dans Profil, activez la vérification automatique une fois par jour ou utilisez Vérifier maintenant. Trackeerr propose l’APK officiel ; votre navigateur le télécharge et Android confirme son installation. Installez par-dessus, sans désinstaller.</p></details>
       </div>
     </section>
-    <p class="privacy-line container">Trackeerr ne vous demande aucun compte. Vos identifiants Jellyfin et Seerr se saisissent dans l’application.</p>
+    <p class="privacy-line container">Aucun compte Trackeerr à créer. Vos identifiants Jellyfin et Seerr se saisissent uniquement dans l’application.</p>
   </main>
   <footer class="footer">
-    <div class="footer-main container"><div><a class="brand" href="./" aria-label="Trackeerr, accueil"><img src="./assets/brand/logo-dark-compact.svg" alt="Trackeerr" width="774" height="200" loading="lazy"></a><p>Les médias à votre rythme.</p></div><nav aria-label="Informations"><a href="https://github.com/DEnySIGN/Trackeerr">GitHub</a><a href="https://github.com/DEnySIGN/Trackeerr/releases">Versions</a><a href="./confidentialite.html">Confidentialité</a></nav></div>
+    <div class="footer-main container"><div><a class="brand" href="./" aria-label="Trackeerr, accueil"><img src="./assets/brand/logo-dark-compact.svg" alt="Trackeerr" width="774" height="200" loading="lazy"></a><p>Les médias à votre rythme.</p></div><nav aria-label="Informations"><a href="https://github.com/DEnySIGN/Trackeerr">GitHub</a><a href="./guide.html">Guide</a><a href="./confidentialite.html">Confidentialité</a></nav></div>
     <div class="footer-bottom container"><span>© 2026 DEnySIGN · Trackeerr</span><span>Jellyfin et Seerr sont des projets indépendants.</span></div>
   </footer>
 </body>

@@ -1,0 +1,9 @@
+{
+  "applicationId": "fr.trackeerr.app.cloudv2",
+  "versionName": "0.6.54",
+  "versionCode": 61,
+  "minSdk": 26,
+  "certificateSHA256": "f3743f0ac490d9fd17816217d3309d9fb2d439787a748185f148068f410c124f",
+  "sha256": "ea22a87fccbb66d7041dc6aa171151627d5a49c500c69b5b57c5d082988ebf75",
+  "bytes": 13975022
+}
